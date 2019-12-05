@@ -5,6 +5,7 @@ import {MatToolbarModule} from '@angular/material'
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import { HttpClientModule }    from '@angular/common/http';
 
 
 
@@ -15,6 +16,8 @@ import { CreateComponent } from './components/create/create.component';
 import { EditComponent } from './components/edit/edit.component';
 
 import { RouterModule, Routes } from '@angular/router';
+import { ReadComponent } from './read/read.component';
+
 
 const routes: Routes = [
   { path: 'create', component: CreateComponent},
@@ -29,7 +32,8 @@ const routes: Routes = [
     AppComponent,
     ListComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    ReadComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,8 @@ const routes: Routes = [
     MatToolbarModule,
     FormsModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
