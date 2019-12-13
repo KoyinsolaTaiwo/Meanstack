@@ -1,0 +1,29 @@
+{
+  "name": "mean-secure",
+  "version": "1.0.0",
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.",
+  "main": "karma.conf.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "core-util-is": "^1.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1",
+    "morgan": "^1.9.1",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KoyinsolaTaiwo/Meanstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KoyinsolaTaiwo/Meanstack/issues"
+  },
+  "homepage": "https://github.com/KoyinsolaTaiwo/Meanstack#readme"
+}

@@ -13,14 +13,21 @@ const artistSchema = new Schema({
   song:String,
   image:String
 });
+
+const ArtistModel = mongoose.model('artist', artistSchema);
+
 const PORT = 3000
 const api = require('./routes/api')
 const app = express()
 
-//app.use(bodyParser.urlencoded({extended: true}))
-//app.use(bodyParser.json())
+
 const cors = require('cors');
 app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
+
+
 app.use(function(req, res, next) {
 res.header("Access-Control-Allow-Origin", "*");
 res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -30,7 +37,6 @@ next();
 });
 
 
-app.use('/api', api)
 
 app.get('/', function(req, res){
     res.send('Hello from server')
@@ -39,6 +45,38 @@ app.get('/', function(req, res){
 //app.get('*',(req, res) => {
 //    res.sendFile(path.join(__dirname, 'dist/mean-secure/index.html'));
 //});
+
+app.get('/api/artist', (req, res, next) => {
+  console.log("get request")
+  ArtistModel.find((err,data) => {
+    res.json({artist:data});
+  })
+})
+
+app.delete('/api/artist/:id', (req,res) =>{
+  console.log(req.params.id);
+
+  ArtistModel.deleteOne({_id:req.params.id},(error,data)=>{
+    if(error)
+      res.json(error);
+
+    res.json(data);
+  })
+})
+
+//search name
+app.get('/api/artist/search/:name/:criteria', (req,res)=>{
+  console.log(req.params.name);
+  console.log(req.params.criteria);
+if(req.params.criteria == 'name')
+  {
+  ArtistModel.find({ 'name': req.params.name},
+(error,data) =>{
+  res.json(data);
+})
+  }
+})
+
 
     app.get('/serverhtml/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -112,6 +150,32 @@ app.get('/api/artists', (req,res,next) =>{
         console.log(req.body.image);
         console.log(req.body.uname);
         console.log(req.body.email);
+
+        ArtistModel.create({
+        name: req.body.name,
+        songs: req.body.songs,
+        image: req.body.image
+        });
+        res.json('data uploaded')
+
+        })
+
+        app.get('/api/artist/:id',(req,res)=>{
+          console.log(req.params.id);
+
+          ArtistModel.findById(req.params.id, (err, data)=>{
+            res.json(data);
+          })
+        })
+
+        app.put('/api/artist/:id', (req, res)=>{
+          console.log(req.body);
+          console.log("Edit "+req.params.id);
+
+          ArtistModel.findByIdAndUpdate(req.params.id,
+            req.body, {new:true}, (error, data)=>{
+              res.send(data);
+            })
         })
 
 app.listen(PORT, function(){
