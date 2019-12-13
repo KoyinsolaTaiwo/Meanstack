@@ -6,8 +6,14 @@ import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule }    from '@angular/common/http';
+import { ArtistService } from './services/artist.service';
+import {
+  MatButtonModule,
+  MatExpansionModule,
+  MatNativeDateModule,
+MatDatepickerModule
 
-
+  } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +23,7 @@ import { EditComponent } from './components/edit/edit.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { ReadComponent } from './read/read.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 const routes: Routes = [
@@ -33,7 +40,8 @@ const routes: Routes = [
     ListComponent,
     CreateComponent,
     EditComponent,
-    ReadComponent
+    ReadComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +52,14 @@ const routes: Routes = [
     FormsModule,
     MatCardModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
   ],
-  providers: [],
+  providers: [ArtistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

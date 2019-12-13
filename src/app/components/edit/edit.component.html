@@ -1,1 +1,37 @@
-<p>edit works!</p>
+<mat-card>
+  <form (submit)="onEditArtist(artistForm)" #artistForm="ngForm">
+    <mat-form-field>
+        <label> Artist Name</label>
+      <input
+        matInput
+        type="text"
+        name="name"
+        ngModel={{artist.name}}
+        required
+        #name="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+        <label>Artist Song</label>
+      <textarea
+        matInput
+        name="song"
+        ngModel={{artist.song}}
+        required
+        #content="ngModel"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <label>Artist Image</label>
+      <textarea
+        matInput
+       rows="4"
+        name="image"
+        ngModel={{artist.image}}
+        required
+        #content="ngModel"></textarea>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit">Edit Artist</button>
+  </form>
+</mat-card>

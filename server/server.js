@@ -1,8 +1,18 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
+const mongoose = require('mongoose');
 
+mongoDB = 'mongodb+srv://dbusername:<dbpassword>@meanappdb-1mhwz.mongodb.net/test?retryWrites=true&w=majority'
+mongoose.connect(mongoDB, {useNewUrlParser:true});
 
+const Schema =mongoose.Schema;
+
+const artistSchema = new Schema({
+  name:String,
+  song:String,
+  image:String
+});
 const PORT = 3000
 const api = require('./routes/api')
 const app = express()
@@ -50,7 +60,7 @@ app.get('/', function(req, res){
         console.log(req.query.email);
         res.send('The artist '+ " " + req.query.artistname +' sang the song' + " " + req.query.songname  + "<br />" +'Thank you '  + " " + req.query.username + "/<br />"+ 'We will email ' + " " + req.query.email +" "+ ' shortly' );
         })
-        
+
 
 
 app.get('/api/artists', (req,res,next) =>{
@@ -71,7 +81,39 @@ app.get('/api/artists', (req,res,next) =>{
     artists: artists
     });
     })
-    
+
+
+    app.get('/api/artists', (req, res)=>{
+        const artists = [
+            {
+                "Artist Name":"T-Pain",
+                "Top Song":"I'm Sprung",
+                "Artist":"https://peopledotcom.files.wordpress.com/2019/10/tpain.jpg"
+            },
+            {
+                "Artist Name":"Trey Songz",
+                "Top Song":"Slow Motion",
+                "Artist":"http://static1.dallasblack.com/Articles/TreySongz08_article.jpgg"
+            }
+        ];
+        res.status(200).json({
+        message: "Everything is good",
+        myArtists:artists
+        })
+        })
+
+
+
+    app.post('/api/artist', (req,res) =>{
+        console.log('post Sucessfull');
+        console.log(req.body)
+        console.log(req.body.name);
+        console.log(req.body.song);
+        console.log(req.body.image);
+        console.log(req.body.uname);
+        console.log(req.body.email);
+        })
+
 app.listen(PORT, function(){
     console.log('Server running on localhost: ' + PORT)
 })
